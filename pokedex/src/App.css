@@ -1,0 +1,152 @@
+body {
+  margin: 0;
+  padding: 30px; 
+  background-color: #333;
+}
+
+/* PokemonList.css */
+.pokemon-list-container {
+  margin: 0;
+  margin-left: 30px;
+  margin-right: 30px;
+  background-color: #eaeaea;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center; 
+  align-items: center; 
+}
+
+.pokemon-item {
+  display: inline-block;
+  width: 23%; 
+  margin: 1%; 
+  padding: 10px;
+  background-color: #d7d7d7;
+  border-radius: 5px;
+  text-align: center;
+}
+.pokemon-item:hover {
+  background-color: #b8b8b8; 
+}
+.pokemon-item:hover div {
+  background-color: #b8b8b8; 
+}
+
+.pokemon-item img {
+  width: 80px; 
+  height: 80px; 
+  margin-bottom: 10px; 
+}
+
+/* Navbar.css */
+.navbar {
+  background-color: #333;
+  color: white;
+  padding: 10px 0;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.logo {
+  font-size: 3.5rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  font-size: 1.5rem;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #61dafb; 
+}
+/*Pokemon*/
+
+.pokemon-container {
+  
+  margin: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.pokemon-image {
+  width: 150px;
+  height: 150px;
+  margin: 10px auto;
+  display: block;
+}
+
+.pokemon-list {
+  list-style: none;
+  padding: 0;
+}
+
+.pokemon-list li {
+  margin: 5px 0;
+}
+
+/*pagination*/
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eaeaea;
+  margin-left: 30px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  margin-right: 30px;
+
+}
+
+.button-container button {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.button-container button:hover {
+  background-color: #45a049; /* Darker green */
+}
+
+.button-container button:disabled {
+  background-color: #cccccc; /* Grey */
+  cursor: not-allowed;
+}
+
+/*About*/
+.about-container {
+  background-color: #f9f9f9;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
