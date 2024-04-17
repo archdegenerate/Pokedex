@@ -14,7 +14,7 @@ function PokemonList() {
             const response = await fetch('https://pokeapi.co/api/v2/pokemon?offset='+ offset + '&limit=' + LIMIT);
             const data = await response.json();
             setPokemonData(data.results);
-            setTotalPages(Math.ceil(totalPages));
+            setTotalPages(Math.ceil(data.count / LIMIT));
             console.log(totalPages);
         };
 
@@ -22,8 +22,8 @@ function PokemonList() {
     }, [currentPage, LIMIT, totalPages]);
 
     const handleNextPage = () => {
-        if (currentPage > 1) {
-            setCurrentPage(currentPage - 1);
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
         }
     };
 
@@ -38,12 +38,12 @@ function PokemonList() {
             <div className="pokemon-list-container">
                 {pokemonData.map((pokemon) => (
                 <Link
-                    to={'/pokemon/${pokemon.url.split('/')[6]}'}
+                    to={'/pokemon/' + pokemon.url.split('/')[6]}
                     key={pokemon.name}
                     className="pokemon-item"
                     >
                     <div key={pokemon.name} className = "pokemon-item">
-                        <img src={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.split('/')[6]}.png'} alt={pokemon.name} 
+                        <img src={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'+ pokemon.url.split('/')[6] + '.png'} alt={pokemon.name} 
                         />
                         <div className="pokemon-details">
                             <h2>{pokemon.name}</h2>

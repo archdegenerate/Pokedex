@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Navbar from './Navbar';
 import { useParams } from 'react-router-dom';
 
 const PokemonDetails = () => {
@@ -8,7 +9,7 @@ const PokemonDetails = () => {
     useEffect(() => {
     const fetchData = async () => {
         try {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+        const response = await fetch("https://pokeapi.co/api/v2/pokemon/" + id);
         if (response.ok) {
             const data = await response.json();
             setPokemonData(data);
@@ -28,7 +29,9 @@ const PokemonDetails = () => {
     }
 
     return (
-    <div className="pokemon-container">
+        <>
+        <Navbar />
+        <div className="pokemon-container">
         <h2>{pokemonData.name}</h2>
         <img
         src={pokemonData.sprites.front_default}
@@ -62,6 +65,7 @@ const PokemonDetails = () => {
         ))}
         </ul>
     </div>
+    </>
     );
 };
 
