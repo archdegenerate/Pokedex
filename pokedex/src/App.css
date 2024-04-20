@@ -127,6 +127,20 @@ body {
   justify-content: center; 
 }
 
+.pokemon-abilities-container {
+  display: flex;
+  align-items: center; 
+  justify-content: space-between; 
+  width: 100%;
+}
+
+.pokemon-abilities-header{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .pokemon-list-types li {
   list-style: none;
   padding: 0;
@@ -143,6 +157,13 @@ body {
 .pokemon-card-header h3{
   height:50%;
   width:50%;
+}
+
+.pokemon-list-abilities{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .pokemon-list-abilities li {
@@ -221,72 +242,90 @@ body {
 .type-normal { 
   background-color: #A8A878; 
   width: 100px;
+  border-radius: 10px;
 }
 .type-fire { 
   background-color: #F08030;
   width: 100px;
+  border-radius: 10px;
 }
 .type-water { 
   background-color: #6890F0;
   width: 100px;
+  border-radius: 10px;
 }
 .type-grass { 
   background-color: #78C850;
   width: 100px;
+  border-radius: 10px;
 }
 .type-electric { 
   background-color: #F8D030;
   width: 100px;
+  border-radius: 10px;
 }
 .type-ice { 
   background-color: #98D8D8; 
   width: 100px;
+  border-radius: 10px;
 }
 .type-fighting { 
   background-color: #C03028;
   width: 100px;
+  border-radius: 10px;
 }
 .type-poison { 
   background-color: #A040A0;
   width: 100px;
+  border-radius: 10px;
 }
 .type-ground { 
   background-color: #E0C068;
   width: 100px;
+  border-radius: 10px;
 }
 .type-flying { 
   background-color: #A890F0;
   width: 100px;
+  border-radius: 10px;
 }
 .type-psychic { 
   background-color: #F85888;
   width: 100px;
+  border-radius: 10px;
 }
 .type-bug { 
   background-color: #A8B820;
   width: 100px;
+  border-radius: 10px;
 }
 .type-rock { 
   background-color: #B8A038;
   width: 100px;
+  border-radius: 10px;
 }
 .type-ghost { 
   background-color: #705898;
   width: 100px;
+  border-radius: 10px;
 }
 .type-dragon { 
   background-color: #7038F8;
   width: 100px;
+  border-radius: 10px;
 }
 .type-dark { 
   background-color: #705848;
   width: 100px;
+  border-radius: 10px;
 }
 .type-steel { 
   background-color: #B8B8D0;
   width: 100px;
+  border-radius: 10px;
 }
 .type-fairy { 
   background-color: #EE99AC;
   width: 100px;
+  border-radius: 10px;
 }

@@ -55,12 +55,16 @@ const PokemonDetails = () => {
         </div>
         </div>
         
+        <div className="pokemon-abilities-container">
+        <div className="pokemon-abilities-header">
         <h3>Abilities:</h3>
+        </div>
         <ul className="pokemon-list-abilities">
         {pokemonData.abilities.map((ability, index) => (
             <li key={index}>{ability.ability.name}</li>
         ))}
         </ul>
+        </div>
         
         <h3>Stats:</h3>
         <ul className="pokemon-list-stats">
