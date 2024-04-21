@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
+import HealthBar from './HealthBar';
+import AttackBar from './AttackBar';
+import DefenseBar from './DefenseBar';
+import SpeedBar from './SpeedBar';
 import { useParams } from 'react-router-dom';
 
 const PokemonDetails = () => {
@@ -66,14 +70,28 @@ const PokemonDetails = () => {
         </ul>
         </div>
         
+        <div className="pokemon-list-stats">
         <h3>Stats:</h3>
-        <ul className="pokemon-list-stats">
+        <p>HP: {pokemonData.stats[0].base_stat}</p>
+        <HealthBar currentHp={pokemonData.stats[0].base_stat} maxHp={340} />
+        <p>Attack: {pokemonData.stats[1].base_stat}</p>
+        <AttackBar currentAttack={pokemonData.stats[1].base_stat} maxAttack={160} />
+        <p>Defense: {pokemonData.stats[2].base_stat}</p>
+        <DefenseBar currentDef={pokemonData.stats[2].base_stat} maxDef={230} />
+        <p>Special Attack: {pokemonData.stats[3].base_stat}</p>
+        <AttackBar currentAttack={pokemonData.stats[3].base_stat} maxAttack={471} />
+        <p>Special Defense: {pokemonData.stats[4].base_stat}</p>
+        <DefenseBar currentDef={pokemonData.stats[4].base_stat} maxDef={615} />
+        <p>Speed: {pokemonData.stats[5].base_stat}</p>
+        <SpeedBar currentSpeed={pokemonData.stats[5].base_stat} maxSpeed={200} />
+        </div>
+        {/* <ul className="pokemon-list-stats">
         {pokemonData.stats.map((stat, index) => (
             <li key={index}>
             {stat.stat.name}: {stat.base_stat}
             </li>
         ))}
-        </ul>
+        </ul> */}
         <h3>Moves:</h3>
         <ul className="pokemon-list-moves">
         {pokemonData.moves.slice(0, 5).map((move, index) => (

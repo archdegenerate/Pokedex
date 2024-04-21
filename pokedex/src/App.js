@@ -1,7 +1,6 @@
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
-import Pokemon from './pages/Pokemon';
 import PokemonDetails from './components/PokemonDetails';
 
 function App() {

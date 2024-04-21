@@ -6,26 +6,28 @@ body {
 
 /* PokemonList.css */
 .pokemon-list-container {
-  margin: 0;
-  margin-left: 30px;
-  margin-right: 30px;
-  background-color: #eaeaea;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
   display: flex;
   flex-wrap: wrap; 
   justify-content: center; 
-  align-items: center; 
+  align-items: center;
+  margin: 0 30px; 
+  background-color: #eaeaea;
+  border-radius: 5px; 
+  text-decoration: none;
 }
 
 .pokemon-item {
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 23%; 
-  margin: 1%; 
+  margin: 1%;
   padding: 10px;
   background-color: #d7d7d7;
   border-radius: 5px;
-  text-align: center;
+  text-align: center; 
+  text-decoration: none;
 }
 .pokemon-item:hover {
   background-color: #b8b8b8; 
@@ -39,6 +41,14 @@ body {
   height: 80px; 
   margin-bottom: 10px; 
 }
+
+.pokemon-details h2 {
+  margin: 0;
+  padding: 0;
+  word-wrap: break-word; 
+  text-decoration: none;
+}
+
 
 /* Navbar.css */
 .navbar {
@@ -173,12 +183,22 @@ body {
   margin-top: 5px;
 }
 
-.pokemon-list-stats li {
+/* .pokemon-list-stats li {
   list-style: none;
   padding: 0;
   margin: auto;
   margin-top: 5px;
+} */
+
+.pokemon-list-stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%; 
+  margin: auto; 
 }
+
 
 .pokemon-list-moves li {
   list-style: none;
@@ -328,4 +348,66 @@ body {
   background-color: #EE99AC;
   width: 100px;
   border-radius: 10px;
+}
+
+/* Health Bar */
+.hp-bar-container {
+  width: 200px; 
+  height: 20px;
+  background-color: #ddd;
+  border: 3px solid black;
+  border-radius: 5px;
+  overflow: hidden; 
+}
+
+.hp-bar {
+  height: 100%;
+  background-color: green; 
+  transition: width 0.5s ease-in-out; 
+}
+
+/* Attack Bar */
+.atk-bar-container {
+  width: 200px; 
+  height: 20px;
+  background-color: #ddd;
+  border: 3px solid black;
+  border-radius: 5px;
+  overflow: hidden; 
+}
+
+.atk-bar{
+  height: 100%;
+  background-color: red; 
+  transition: width 0.5s ease-in-out; 
+}
+
+/* Defense Bar */
+.def-bar-container {
+  width: 200px; 
+  height: 20px;
+  background-color: #ddd;
+  border: 3px solid black;
+  border-radius: 5px;
+  overflow: hidden; 
+}
+.def-bar{
+  height: 100%;
+  background-color: darkgray; 
+  transition: width 0.5s ease-in-out; 
+}
+
+/* Speed Bar */
+.spd-bar-container {
+  width: 200px; 
+  height: 20px;
+  background-color: #ddd;
+  border: 3px solid black;
+  border-radius: 5px;
+  overflow: hidden; 
+}
+.spd-bar{
+  height: 100%;
+  background-color: lightblue; 
+  transition: width 0.5s ease-in-out; 
 }
