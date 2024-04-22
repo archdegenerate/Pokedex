@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import '../App.css';
 
 function PokemonList() {
@@ -7,19 +8,31 @@ function PokemonList() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const LIMIT = 9;
+    const getTypeColorName = (typeName) => 'pokemon-type-'+typeName;
 
 
     useEffect(() => {
         const fetchData = async (offset, LIMIT) => {
-            const response = await fetch('https://pokeapi.co/api/v2/pokemon?offset='+ offset + '&limit=' + LIMIT);
+        try {
+            const response = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${LIMIT}`);
             const data = await response.json();
-            setPokemonData(data.results);
             setTotalPages(Math.ceil(data.count / LIMIT));
-            console.log(totalPages);
-        };
 
+            const pokemonDetails = await Promise.all(
+                data.results.map(async (pokemon) => {
+                const pokemonResponse = await fetch(pokemon.url);
+                return pokemonResponse.json();
+                })
+            );
+    
+            setPokemonData(pokemonDetails);
+            } catch (error) {
+            console.error('Error fetching data:', error);
+            }
+        };
+    
         fetchData((currentPage - 1) * LIMIT, LIMIT);
-    }, [currentPage, LIMIT, totalPages]);
+        }, [currentPage, LIMIT]);
 
     const handleNextPage = () => {
         if (currentPage < totalPages) {
@@ -36,22 +49,22 @@ function PokemonList() {
     return (
         <>
             <div className="pokemon-list-container">
-                {pokemonData.map((pokemon) => (
-                <Link
-                    to={'/pokemon/' + pokemon.url.split('/')[6]}
-                    key={pokemon.name}
-                    className="pokemon-item"
-                    >
-                    <div key={pokemon.name} className = "pokemon-item">
-                        <img src={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'+ pokemon.url.split('/')[6] + '.png'} alt={pokemon.name} 
-                        />
-                        <div className="pokemon-details">
-                            <h2>{pokemon.name}</h2>
-                            <p>ID: {pokemon.url.split('/')[6]}</p>
-                        </div>
-                    </div>
-                </Link>
-                ))}
+            {pokemonData.map((pokemon) => (
+            <Link
+                to={'/pokemon/' + pokemon.id} // Adjust according to the detailed data structure
+                key={pokemon.id}
+                className="pokemon-item"
+                id={pokemon.types && pokemon.types.length > 0 ? getTypeColorName(pokemon.types[0].type.name) : 'pokemon-type-default'}
+            >
+                <div className="pokemon-item">
+                <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+                <div className="pokemon-details">
+                    <h2>{pokemon.name}</h2>
+                    <p>ID: {pokemon.id}</p>  {/* Adjust ID extraction based on detailed data */}
+                </div>
+                </div>
+            </Link>
+            ))}
             </div>
             <div className="button-container">
             <div>
