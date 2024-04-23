@@ -9,33 +9,73 @@ import { useParams } from 'react-router-dom';
 const PokemonDetails = () => {
     const { id } = useParams();
     const [pokemonData, setPokemonData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
     const getTypeColorName = (typeName) => 'type-'+typeName;
 
-    useEffect(() => {
-    const fetchData = async () => {
-        try {
-        const response = await fetch("https://pokeapi.co/api/v2/pokemon/" + id);
-        if (response.ok) {
-            const data = await response.json();
-            setPokemonData(data);
-        } else {
-            throw new Error('Failed to fetch data');
-        }
-        } catch (error) {
-        console.error('Error fetching data:', error);
-        }
-    };
 
-    fetchData();
+    useEffect(() => {
+        const fetchPokemonData = async () => {
+            setLoading(true);
+            try {
+                const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+                if (!response.ok) throw new Error('Failed to fetch Pokémon data');
+                
+                const data = await response.json();
+                const speciesResponse = await fetch(data.species.url);
+                if (!speciesResponse.ok) throw new Error('Failed to fetch species data');
+                
+                const speciesData = await speciesResponse.json();
+                const evolutionChainResponse = await fetch(speciesData.evolution_chain.url);
+                if (!evolutionChainResponse.ok) throw new Error('Failed to fetch evolution chain');
+                
+                const evolutionData = await evolutionChainResponse.json();
+                const evolutionChain = await processEvolutionChain(evolutionData.chain);
+                
+                setPokemonData({ ...data, evolutionChain });
+                setLoading(false);
+            } catch (error) {
+                console.error('Error:', error);
+                setError(error.message);
+                setLoading(false);
+            }
+        };
+    
+        fetchPokemonData();
     }, [id]);
 
-    if (!pokemonData) {
-    return <div>Loading...</div>;
-    }
+    const processEvolutionChain = async (chain) => {
+        const evolutionChain = [];
+        let currentStage = chain;
+    
+        while (currentStage) {
+            const speciesResponse = await fetch(currentStage.species.url);
+            const speciesData = await speciesResponse.json();
+            const pokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${speciesData.id}`);
+            const pokemonData = await pokemonResponse.json();
+    
+            evolutionChain.push({
+                speciesName: currentStage.species.name,
+                speciesId: speciesData.id,
+                spriteUrl: pokemonData.sprites.front_default
+            });
+    
+            currentStage = currentStage.evolves_to.length > 0 ? currentStage.evolves_to[0] : null;
+        }
+    
+        return evolutionChain;
+    };
+    
 
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
+    if (!pokemonData) return <div>No data available.</div>;
+
+    const spriteUrl = pokemonData.sprites.versions['generation-v']['black-white'].animated.front_default || 
+                        pokemonData.sprites.front_default;
     return (
         <>
-        <Navbar />
+        <Navbar sticky="top"/>
         <div className="pokemon-container">
         <div className="pokemon-card">
         <h2>{pokemonData.name.toUpperCase()}</h2>
@@ -85,19 +125,31 @@ const PokemonDetails = () => {
         <p>Speed: {pokemonData.stats[5].base_stat}</p>
         <SpeedBar currentSpeed={pokemonData.stats[5].base_stat} maxSpeed={200} />
         </div>
-        {/* <ul className="pokemon-list-stats">
-        {pokemonData.stats.map((stat, index) => (
-            <li key={index}>
-            {stat.stat.name}: {stat.base_stat}
-            </li>
-        ))}
-        </ul> */}
         <h3>Moves:</h3>
         <ul className="pokemon-list-moves">
         {pokemonData.moves.slice(0, 5).map((move, index) => (
             <li key={index}>{move.move.name}</li>
         ))}
         </ul>
+        </div>
+        <div className="pokemon-other">
+            <h2>Other information:</h2>
+            <div className="pokemon-sprites">
+            <h3>Sprite</h3>
+            <img src={spriteUrl} alt={pokemonData.name} />
+            </div>
+        </div>
+        <div className="pokemon-evolution-chain">
+            <h3>Evolution Chain:</h3>
+            <ul className="pokemon-evolution-chain-sprites">
+                {pokemonData.evolutionChain.map((evolution, index) => (
+                    <li key={index}>
+                        <img src={evolution.spriteUrl} alt={evolution.speciesName} />
+                        <break></break>
+                        <p>{evolution.speciesName}</p>
+                    </li>
+                ))}
+            </ul>
         </div>
     </div>
     </>

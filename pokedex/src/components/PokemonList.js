@@ -51,7 +51,7 @@ function PokemonList() {
             <div className="pokemon-list-container">
             {pokemonData.map((pokemon) => (
             <Link
-                to={'/pokemon/' + pokemon.id} // Adjust according to the detailed data structure
+                to={'/pokemon/' + pokemon.id} 
                 key={pokemon.id}
                 className="pokemon-item"
                 id={pokemon.types && pokemon.types.length > 0 ? getTypeColorName(pokemon.types[0].type.name) : 'pokemon-type-default'}
@@ -60,7 +60,7 @@ function PokemonList() {
                 <img src={pokemon.sprites.front_default} alt={pokemon.name} />
                 <div className="pokemon-details">
                     <h2>{pokemon.name}</h2>
-                    <p>ID: {pokemon.id}</p>  {/* Adjust ID extraction based on detailed data */}
+                    <p>ID: {pokemon.id}</p> 
                 </div>
                 </div>
             </Link>
@@ -68,13 +68,13 @@ function PokemonList() {
             </div>
             <div className="button-container">
             <div>
-                <button onClick={handlePrevPage} disabled={currentPage <= 1}>
-                    Prev Page
+                <button onClick={handlePrevPage} disabled={currentPage <= 1} className="pokemon-list-button">
+                    ←
                 </button>
             </div>
             <div>
-            <button onClick={handleNextPage} disabled={currentPage >= totalPages}>
-                Next Page
+            <button onClick={handleNextPage} disabled={currentPage >= totalPages} className="pokemon-list-button">
+                →
             </button>
             </div>
         </div>

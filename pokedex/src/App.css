@@ -24,7 +24,6 @@ body {
   width: 23%; 
   margin: 1%;
   padding: 10px;
-  /* background-color: #d7d7d7; */
   border-radius: 5px;
   text-align: center; 
   text-decoration: none;
@@ -53,9 +52,11 @@ body {
 
 /* Navbar.css */
 .navbar {
-  background-color: #a51111;
+  background-color: rgb(184, 184, 184);
   color: white;
   padding: 10px 0;
+  border-radius: 20px;
+  margin-bottom: 3%;
 }
 
 .navbar-container {
@@ -184,12 +185,20 @@ body {
   margin-top: 5px;
 }
 
-/* .pokemon-list-stats li {
+.pokemon-evolution-chain ul{
   list-style: none;
-  padding: 0;
-  margin: auto;
-  margin-top: 5px;
-} */
+  margin:auto;
+  margin-top:5px;
+  padding:0;
+}
+
+.pokemon-evolution-chain img{
+  width: 150px;
+}
+
+.pokemon-sprites img{
+  width: 180px;
+}
 
 .pokemon-list-stats {
   display: flex;
@@ -206,6 +215,12 @@ body {
   padding: 0;
   margin: auto;
   margin-top: 5px;
+}
+
+.pokemon-evolution-chain-sprites{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .pokemon-list-types, .pokemon-list-abilities, .pokemon-list-stats, .pokemon-list-moves {
@@ -227,25 +242,24 @@ body {
 }
 
 .button-container button {
-  background-color: #4caf50; /* Green */
   border: none;
-  color: white;
-  padding: 10px 20px;
+  color: black;
+  background-color: #eaeaea;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 24px;
   margin: 5px;
   cursor: pointer;
   border-radius: 5px;
 }
 
 .button-container button:hover {
-  background-color: #45a049; /* Darker green */
+  color:#a51111;
 }
 
 .button-container button:disabled {
-  background-color: #cccccc; /* Grey */
+  color:#eaeaea;
   cursor: not-allowed;
 }
 
