@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import SearchBar from './SearchBar';
 import '../App.css';
 
 function PokemonList() {
     const [pokemonData, setPokemonData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [searchQuery, setSearchQuery] = useState('');
     const LIMIT = 9;
     const getTypeColorName = (typeName) => 'pokemon-type-'+typeName;
 
@@ -48,14 +50,17 @@ function PokemonList() {
 
     return (
         <>
+            <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
             <div className="pokemon-list-container">
-            {pokemonData.map((pokemon) => (
-            <Link
-                to={'/pokemon/' + pokemon.id} 
-                key={pokemon.id}
-                className="pokemon-item"
-                id={pokemon.types && pokemon.types.length > 0 ? getTypeColorName(pokemon.types[0].type.name) : 'pokemon-type-default'}
-            >
+            {pokemonData
+                    .filter(pokemon => pokemon.name.toLowerCase().includes(searchQuery))
+                    .map((pokemon) => (
+                    <Link
+                        to={'/pokemon/' + pokemon.id} 
+                        key={pokemon.id}
+                        className="pokemon-item"
+                        id={pokemon.types && pokemon.types.length > 0 ? getTypeColorName(pokemon.types[0].type.name) : 'pokemon-type-default'}
+                    >
                 <div className="pokemon-item">
                 <img src={pokemon.sprites.front_default} alt={pokemon.name} />
                 <div className="pokemon-details">
