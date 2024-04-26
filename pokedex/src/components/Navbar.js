@@ -11,6 +11,7 @@ function Navbar() {
                 <ul className="nav-links">
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/about">About</Link></li>
+                    <li><a href="https://github.com/archdegenerate/Pokedex" target="_blank" rel="noreferrer">Github repo</a></li>
                 </ul>
             </div>
         </nav>
