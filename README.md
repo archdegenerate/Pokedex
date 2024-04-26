@@ -2,7 +2,7 @@
 
 An assignment turned into a hobby project.
 
-I use this React app to practice working with third part APIs, in this case the PokéAPI. The Pokedex project also utilizes React Router to move inbetween pages.
+I use this React app to practice working with third party APIs, in this case the PokéAPI. The Pokedex project also utilizes React Router to move in-between pages.
 
 New features are continually added whenever I have the time to play around with it :)
 
